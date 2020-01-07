@@ -81,7 +81,6 @@ namespace FirstWpf
                     else
                     {
                         MessageBox.Show($"Acces Denied");
-                        MessageBox.Show($"{pers.EmployeeId}");
                     }
                   
                 }

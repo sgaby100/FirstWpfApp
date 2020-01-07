@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FirstWpf"
         mc:Ignorable="d" Background="Black" ResizeMode="NoResize"
-        Title="LogInWindow" Height="300" Width="500">
+        Title="LogInWindow" Height="600" Width="700">
     <Border Background="Blue" Margin="10" CornerRadius="50"  >
         <Grid>
             <Grid.ColumnDefinitions>
@@ -21,7 +21,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Label FontSize="30" Grid.Column="0" 
+        <Label FontSize="70" Grid.Column="0" 
+               Grid.RowSpan="2"
                Margin="10"
                FontStyle="Italic"
                Grid.ColumnSpan="4" HorizontalAlignment="Center"
@@ -29,43 +30,55 @@
           Log In  
         </Label>
         <TextBlock Grid.Row="1" Grid.Column="2" FontStyle="Italic"
-                   Margin="60,10,5,10"
-                   FontWeight="Black">
+                   Margin="80,100,5,10"
+                   
+                   FontSize="30">
+            
             UserName
         </TextBlock>
         <TextBox Grid.Column="3" Grid.Row="1" 
+                 FontSize="30"
                  x:Name="userName"
-                 Margin="10,10,0,10" 
+                 Margin="10,100,0,10" 
                  HorizontalAlignment="Left"
-                 Width="100">
+                 Width="200">
         </TextBox>
         <TextBlock Grid.Column="2" Grid.Row ="2"
-                   Margin="60,10,5,10"
-                   FontWeight="Black"
-                   FontStyle="Italic">
+                   Margin="80,10,5,10"
+                   FontStyle="Italic"
+                   FontSize="30">
+            
             Password
         </TextBlock>
         <PasswordBox Grid.Column="3" Grid.Row="2"
+                     FontSize="30"
                      x:Name="passwoardUI"
                      Margin="10,10,0,10"
-                     Width="100" HorizontalAlignment="Left"
+                     Width="200" HorizontalAlignment="Left"
                      />
-            <Button Width="70" 
+            <Button Width="150"
+                    FontSize="30"
+                    Height="70"
                     x:Name="LogIn"
                     Click="LogInBtn_Click"
-                    Height="30"
-                    Margin="0,-30,0,0"
+                    Margin="0,-60,0,0"
                     Grid.Row="3" Grid.ColumnSpan="4" 
                     HorizontalAlignment="Center">
                 Log in
             </Button>
-            <CheckBox Width="100" 
+            <CheckBox Width="140" 
                       x:Name="AddUser"
-                      Height="50" 
-                      Content="new User" 
+                      FontSize="25"
+                      Height="100" 
+                      Content="New User" 
                       Grid.Row="5" 
-                      Grid.Column="6" Checked="AddUser_Checked" 
-                      />
+                      Grid.Column="6" Checked="AddUser_Checked" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5" 
+                      >
+                <CheckBox.LayoutTransform>
+                    <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                </CheckBox.LayoutTransform>
+            </CheckBox>
+            
         </Grid>
 
     </Border>
