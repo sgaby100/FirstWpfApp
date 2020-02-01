@@ -1,5 +1,6 @@
 language: csharp
 solution: FirstWpf.sln
+os: windows
 mono:
   - latest
 install:
