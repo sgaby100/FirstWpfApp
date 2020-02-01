@@ -10,6 +10,5 @@ addons:
       secure: "BZDene6A5clNH3hvnRoJSNjnys+wHPcoaUwXh1zxVOmCzuW83ZWvvuOQhoTFuRrTDUHMmE89E32esp8oNffQwlsEkqNA26b75ZISAM6HT6Ky2COoEjrnVEXl9Tgep98/1MOWelGEXeMz5XhB1MuJ/7v0LmdMmCJ7h+jBxRJZVRwd0ime/Sie4//FaOClv8vcwr6y5WYqO020UIHef991nxv++hGq0P19ZhismeZenRlgWV0BGDOnkuF1svfLnOBL1qw+AJ7FyhuaDCxyxuZy0AgirhOLJZVgIPE06sQNuUPM+/CJx36qX2JcSlvo7Ae8gcwx8BEvDvy8ahJ0SgznLedIEEyprn3509IFqxRUr0n41txdZlutVE9dGzbyY1VDzCEgclHYGPwKa9FqM8+Qlb2abSkBM1c+ESJGy+CzAdKSn1JAPFTbDhzfSkUDwEQwtdZzCoXlZC5cN8scCugaUW0F3s/kLyZ/wPyqu+ZpV3AEv3XpWH+lSDcfFixiY5ArTBJ0PSUY+ICV6R920lUQlwHU2ZLVO1GlOahpi9M89UpRAdm1nfspDSPZ92J9wvym1BLo5eKWsJKXo8xEvmtovGZR/aX4YfeB1VJZbUgnKxqI/rJkDuuYWVthPWF8NmGeKr9N8ZUmpTMBMWrdu8Tx4ezZrBprp/NqM22Zfcgg3CA=" # encrypted value of your token
 
 script:
- - dotnet restore
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
   # - sonar-scanner
