@@ -1,0 +1,5 @@
+C:\Projects\FirstWpf\DataHOlder\obj\Debug\DataHOlder.csprojAssemblyReference.cache
+C:\Projects\FirstWpf\DataHOlder\obj\Debug\App.g.cs
+C:\Projects\FirstWpf\DataHOlder\obj\Debug\DataHOlder_MarkupCompile.cache
+C:\Projects\FirstWpf\DataHOlder\obj\Debug\DataHOlder.Properties.Resources.resources
+C:\Projects\FirstWpf\DataHOlder\obj\Debug\DataHOlder.csproj.GenerateResource.cache

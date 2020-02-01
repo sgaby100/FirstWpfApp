@@ -1,17 +1,304 @@
 ﻿<Window x:Class="FirstWpf.MainWindow"
+        x:Name="mainwindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:syncfusion="http://schemas.syncfusion.com/wpf" 
         xmlns:local="clr-namespace:FirstWpf"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <DockPanel>
-        <Menu>
-            <MenuItem FontSize="18" Header="Account">
-                <MenuItem Header="LogOut"/>
-            </MenuItem>
+         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="Gaby Library" Height="450" Width="800" >
+    <materialDesign:DrawerHost
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        BorderThickness="1"
+        Height="415"
+        Width="800"
+        BorderBrush="{DynamicResource MaterialDesignDivider}">
 
-        </Menu>
-    </DockPanel>
+        <materialDesign:DrawerHost.LeftDrawerContent>
+            <StackPanel x:Name="leftside">
+                <Button
+                    Background="AliceBlue"
+                    Margin="10"
+                    Style="{StaticResource MaterialDesignIconForegroundButton}"
+                    >
+                    <materialDesign:PackIcon
+                     Kind="Person"
+                     x:Name="hidenimg"
+                     />
+
+
+                </Button>
+                <Button
+                    Click="LogOut"
+                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                    CommandParameter="{x:Static Dock.Left}"
+                    Margin="4"
+                    HorizontalAlignment="Center"
+                    Style="{DynamicResource MaterialDesignFlatButton}">
+                    Log Out
+                </Button>
+
+                <Button
+                    Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                    CommandParameter="{x:Static Dock.Left}"
+                    Margin="4"
+                    Click="Shop"
+                    HorizontalAlignment="Center"
+                    Style="{DynamicResource MaterialDesignFlatButton}">
+                    Shop
+
+                </Button>
+
+                <ToggleButton
+                    x:Name="Toggle"
+                    Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"
+                    ToolTip="MaterialDesignSwitchDarkToggleButton"
+                    IsChecked="False"
+                    Unchecked="Toggle_Unchecked"
+                    Checked="ToggleButton_Checked"
+                    />
+            </StackPanel>
+        </materialDesign:DrawerHost.LeftDrawerContent >
+        <Grid
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Margin="12,10,-13.6,-6.4"
+            Height="410"
+            Width="800"
+            MinHeight="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0"
+                  Grid.ColumnSpan="6"
+                  VerticalAlignment="Top"
+                  HorizontalAlignment="Left"
+                  Width="auto"
+                  Margin="3"
+                  Height="20">
+                <TextBlock x:Name="Time">
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.ColumnSpan="6"
+                  Grid.RowSpan="6"
+                  x:Name="ShopWindow"
+                  Margin="0,40,40,0"
+                  Height="320"
+                  Visibility="Visible"
+                  >
+             
+                <Border 
+                        BorderBrush="Gray"
+                        BorderThickness="5,5,3,3"
+                        Background="LightGray">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="8"/>
+                    </Border.Effect>
+                </Border>
+
+
+                <Grid Background="White"
+                      Width="680"
+                      Height="240"
+                      Margin="12,12,12,12"
+                      VerticalAlignment="Bottom">
+                    <ScrollViewer
+                        Margin="0,0,10,0"
+                        Padding="13,0,0,0">
+                        <ItemsControl x:Name="ItemControl">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                
+                                    <Grid Width="150"
+                                      Height="150"
+                                      x:Name="card"
+                                      Margin="5,60,5,5"
+                                      >
+                                        <Grid
+                                            Margin="0,-200,0,0"
+                                            Background="LightCyan"
+                                            Width="200"
+                                            MouseEnter="MouseOver"
+                                            Height="50"
+                                            HorizontalAlignment="Center"
+                                            >
+                                            <Border 
+                                                Margin="0,-6,0,0"
+                                                Padding="0"
+                                                BorderBrush="Black"
+                                                BorderThickness="29,5,29,0"
+                                                        />
+                                            <TextBlock
+                                               TextWrapping="Wrap"
+                                                TextAlignment="Center"
+                                                Margin="30,6,30,0"
+                                                FontWeight="DemiBold"
+                                                FontStyle="Italic"
+                                                Text="{Binding Title}"
+                                                    >
+                                            </TextBlock>
+                                        </Grid>
+                                        <Image 
+                                            Source="{Binding imageLinks.thumbnail}"
+                                            x:Name="img"
+                                            Stretch="Fill"/>
+                                        <Border
+                                            BorderThickness="4,0,4,3"
+                                            BorderBrush="Black">
+                                      
+                                        </Border>
+                                        <Button 
+                                            Content="Buy"
+                                            Width="70"
+                                            Height="30"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Bottom"
+                                            Margin="5" />
+                                    <Button Content="Details"
+                                            x:Name="details"
+                                            Width="60"
+                                            materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                            Padding="5"
+                                            Height="30"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Bottom"
+                                            Margin="5" />
+                                        <Image x:Name="imgAdd"
+                                              />
+                                    </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                            ItemControl.ActualHeight
+
+                        </ItemsControl>
+                        
+                        
+                    </ScrollViewer>
+                </Grid>
+
+
+                <Button 
+                        Background="Blue"
+                        Padding="0"
+                        Click="closeShop"
+                        Foreground="Black"
+                        Width="20"
+                        Height="20"
+                        FontSize="10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="10"
+                        Content="X"
+                        />
+                
+
+
+                   
+
+                <TextBox HorizontalAlignment="Right"
+                         VerticalAlignment="Top"
+                         MinWidth="150"
+                         x:Name="SearchBar"
+                         MaxWidth="500"
+                         Width="auto"
+                         Margin="0,15,120,0"
+                         Height="30"
+                         Background="White">
+                </TextBox>
+                <Button Content="Search"
+                        Width="80"
+                        x:Name="SearchBtn"
+                        Height="35"
+                        Click="SearchBtn_Click"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Margin="0,12,40,0"
+                        />
+            </Grid>
+            
+            <Grid 
+                  Grid.Column="5"
+                  >
+                <TextBlock 
+                           Width="auto"
+                           Height="20"
+                           HorizontalAlignment="Right"
+                           VerticalAlignment="Top"
+                           x:Name="Credit"
+                           FontSize="20"
+                           Margin="5,-2,10,0"
+                >
+                </TextBlock>
+            </Grid>
+            <Grid 
+                Grid.Column="4"
+                HorizontalAlignment="Right">
+                <materialDesign:PackIcon
+                    Kind="Account"
+                    Width="20"
+                    Height="20"
+                    />
+            </Grid>
+            <Button
+                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                    CommandParameter="{x:Static Dock.Left}"
+                    Grid.ColumnSpan="2"
+                    Margin="-220,0,0,0"
+                    Height="150"
+                    Width="60"
+                    Grid.RowSpan="6"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Right"
+                    Padding="0"
+                    >
+                <materialDesign:PackIcon
+                    Kind="ArrowRight"
+                    Width="30"
+                    />
+
+            </Button>
+
+            <TextBlock Height="100" 
+                       Width="200"
+                       Grid.Row="0" 
+                       FontSize="40"
+                       Grid.ColumnSpan="6"
+                       FontFamily="ariel"
+                       Foreground="SkyBlue"
+                       >
+                Welcome
+            </TextBlock>
+        </Grid>
+
+    </materialDesign:DrawerHost>
 </Window>

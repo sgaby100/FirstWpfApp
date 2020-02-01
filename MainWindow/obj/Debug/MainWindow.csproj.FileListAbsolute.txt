@@ -1,0 +1,3 @@
+C:\Projects\FirstWpf\MainWindow\obj\Debug\MainWindow.csprojAssemblyReference.cache
+C:\Projects\FirstWpf\MainWindow\obj\Debug\App.g.cs
+C:\Projects\FirstWpf\MainWindow\obj\Debug\MainWindow_MarkupCompile.cache

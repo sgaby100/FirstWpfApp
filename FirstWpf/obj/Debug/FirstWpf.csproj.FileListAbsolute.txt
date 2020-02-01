@@ -36,3 +36,9 @@ C:\Projects\FirstWpf\FirstWpf\obj\Debug\FirstWpf.csproj.GenerateResource.cache
 C:\Projects\FirstWpf\FirstWpf\obj\Debug\FirstWpf.csproj.CopyComplete
 C:\Projects\FirstWpf\FirstWpf\obj\Debug\FirstWpf.exe
 C:\Projects\FirstWpf\FirstWpf\obj\Debug\FirstWpf.pdb
+C:\Projects\FirstWpf\FirstWpf\bin\Debug\MaterialDesignColors.dll
+C:\Projects\FirstWpf\FirstWpf\bin\Debug\MaterialDesignThemes.Wpf.dll
+C:\Projects\FirstWpf\FirstWpf\bin\Debug\MaterialDesignColors.pdb
+C:\Projects\FirstWpf\FirstWpf\bin\Debug\MaterialDesignThemes.Wpf.pdb
+C:\Projects\FirstWpf\FirstWpf\bin\Debug\MaterialDesignThemes.Wpf.xml
+C:\Projects\FirstWpf\FirstWpf\obj\Debug\App.baml

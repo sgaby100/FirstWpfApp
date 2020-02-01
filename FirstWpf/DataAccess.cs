@@ -19,20 +19,49 @@ namespace FirstWpf
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("EmplyeesDB")))
             {
-                var output = connection.Query<Person>($"select * from Emplyees where UserName = '{name}'").ToList();
+                DataClasses1DataContext dbContext = new DataClasses1DataContext();
 
-                return output;
+                var solutie = from employe in dbContext.Emplyees
+                              where employe.UserName == name
+                              select employe;
+                List<Person> pers = new List<Person>();
+
+                foreach (var stat in solutie)
+                {
+                    pers.Add(new Person {UserName = stat.UserName,EmployeeId = Int32.Parse(stat.EmployeeId),Password = stat.Password});
+                    return pers;
+                }
+                return pers;
             }
         }
 
         public void AddEmployees(string userName, string passwoardUI,int id)
         {
-            string sql = "INSERT INTO Emplyees (UserName, Password,EmployeeId) Values (@UserName, @Password, @EmployeeId);";
+
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("EmplyeesDB")))
             {
                 string EncryptedPassword = (DataEncoding.Encrypt(passwoardUI));
-                Person c = new Person { UserName = userName, Password = EncryptedPassword, EmployeeId = id};
-                var affectedRows = connection.Execute(sql, c);
+
+                DataClasses1DataContext dbContext = new DataClasses1DataContext();
+
+                Emplyee pers = new Emplyee
+                {
+                EmployeeId = id.ToString(),
+                UserName = userName,
+                Password = EncryptedPassword,
+                };
+
+                dbContext.Emplyees.InsertOnSubmit(pers);
+
+                try
+                {
+                    dbContext.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());
+                }
+
             }
         }
     }
