@@ -1,5 +1,7 @@
 language: csharp
 solution: FirstWpf.sln
+mono:
+  - latest
 install:
   - nuget restore FirstWpf.sln
 dist: trusty
