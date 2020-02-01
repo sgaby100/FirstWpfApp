@@ -1,2 +1,12 @@
 language: csharp
 solution: FirstWpf.sln
+dist: trusty
+addons:
+  sonarcloud:
+    organization: "sgaby100"
+    token:
+      secure: "**************************" # encrypted value of your token
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - sonar-scanner
