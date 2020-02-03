@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -28,10 +27,8 @@ namespace FirstWpf
         {
             Random newRandom = new Random();
             int ID = newRandom.Next(5, 100);
-            EncodingData DataEncoding = new EncodingData();
             DataAccess db = new DataAccess();
             people = db.GetPeople(userName.Text);
-            string compare = userName.Text;
 
 
 
@@ -44,36 +41,16 @@ namespace FirstWpf
             }
             //Check if the user is already in db
             if (AddUser.IsChecked.Value)
-            {
-                if (String.IsNullOrEmpty(userName.Text) || String.IsNullOrEmpty(passwoardUI.Password))
+            { 
+                if (String.IsNullOrEmpty(userName.Text) || String.IsNullOrEmpty(passwoardUI.Password) || people.Any(person => person.UserName.Trim() == userName.Text) || userName.Text.Length > 10)
                 {
-                    MessageBox.Show("You did not enter Any Valid UserName or Password");
-                    return;
+                    MessageBox.Show("Error");
                 }
-                if (people.Any(person => person.UserName.Trim() == userName.Text))
+                if(!AddUser.IsChecked.Value)
                 {
-                   MessageBox.Show("Already Exist");
-                }
-                else
-                {
-                    if(userName.Text.Length > 10)
-                    {
-                        MessageBox.Show("Username Too Long");
-                        return;
-                    }
-                    DataAccess ac = new DataAccess();
                   
-                    string[] digit = Regex.Split(compare, @"\D+");
-                    foreach(string value in digit)
-                    {
-                        int number;
-                        if (int.TryParse(value, out number))
-                        {
-                            MessageBox.Show("You cant use numbers in your Username");
-                            return;
-                        }
-                    }
-
+                    DataAccess ac = new DataAccess();
+                 
                     if (people.Any(x => x.ID != ID))
                     {
                         ac.AddEmployees(userName.Text, passwoardUI.Password, ID);
@@ -92,23 +69,31 @@ namespace FirstWpf
             else
             {
                 //Check credentials of the input with the db ones
-                foreach (Emplyee pers in people)
-                {
-                    string pas = pers.Password;
-                    string DecryptedPassword = DataEncoding.Decript(pas);
-                    if (people.Any(person => person.UserName.Trim() == userName.Text) && people.Any(person => DecryptedPassword == passwoardUI.Password))
-                    {
+                enroll(sender, e);
+            }
+        }
 
-                        MessageBox.Show("Logged in");
-                        GotoMainWindow(sender, e);
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Acces Denied");
-                    }
+        public void enroll(object sender, RoutedEventArgs e)
+        {
+            EncodingData DataEncoding = new EncodingData();
+
+            foreach (Emplyee pers in people)
+            {
+                string pas = pers.Password;
+                string DecryptedPassword = DataEncoding.Decript(pas);
+                if (people.Any(person => person.UserName.Trim() == userName.Text) && people.Any(person => DecryptedPassword == passwoardUI.Password))
+                {
+
+                    MessageBox.Show("Logged in");
+                    GotoMainWindow(sender, e);
+                }
+                else
+                {
+                    MessageBox.Show($"Acces Denied");
                 }
             }
         }
+
         //moving throw windows
         private void GotoMainWindow(object sender, RoutedEventArgs e)
         {
