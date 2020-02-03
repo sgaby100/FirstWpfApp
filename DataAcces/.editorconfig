@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# S5542: Encryption algorithms should be used with secure mode and padding scheme
+dotnet_diagnostic.S5542.severity = silent
