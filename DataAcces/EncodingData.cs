@@ -9,10 +9,16 @@ namespace FirstWpf
 
     public class EncodingData
     {
-        private Aes aes = new AesManaged();
+        static System.Security.Cryptography.Aes  Aes()
+        {
+            Aes aes = new AesManaged();
+            return aes;
+        }
+        private readonly System.Security.Cryptography.Aes aeo = Aes();
 
         public string Decript(string pass)
         {
+
             string strDecrypted = (Decrypt(pass));
             return strDecrypted;
         }
@@ -47,32 +53,35 @@ namespace FirstWpf
         }
 
         // encrypt
-        public  byte[] Encrypt(byte[] strData)
+        private  byte[] Encrypt(byte[] strData)
         {
-            PasswordDeriveBytes passbytes =
+
+
+        PasswordDeriveBytes passbytes =
             new PasswordDeriveBytes(Global.strPermutation,
             new byte[] { Global.bytePermutation1,
                          Global.bytePermutation2,
                          Global.bytePermutation3,
                          Global.bytePermutation4
             });
-
             MemoryStream memstream = new MemoryStream();
             
-            aes.Key = passbytes.GetBytes(aes.KeySize / 8);
-            aes.IV = passbytes.GetBytes(aes.BlockSize / 8);
+            aeo.Key = passbytes.GetBytes(aeo.KeySize / 8);
+            aeo.IV = passbytes.GetBytes(aeo.BlockSize / 8);
 
 
             CryptoStream cryptostream = new CryptoStream(memstream,
-            aes.CreateEncryptor(), CryptoStreamMode.Write);
+            aeo.CreateEncryptor(), CryptoStreamMode.Write);
             cryptostream.Write(strData, 0, strData.Length);
             cryptostream.Close();
             return memstream.ToArray();
         }
 
         // decrypt
-        public  byte[] Decrypt(byte[] strData)
+        private  byte[] Decrypt(byte[] strData)
         {
+            
+
             PasswordDeriveBytes passbytes =
             new PasswordDeriveBytes(Global.strPermutation,
             new byte[] { Global.bytePermutation1,
@@ -82,11 +91,11 @@ namespace FirstWpf
             });
 
             MemoryStream memstream = new MemoryStream();
-            aes.Key = passbytes.GetBytes(aes.KeySize / 8);
-            aes.IV = passbytes.GetBytes(aes.BlockSize / 8);
+            aeo.Key = passbytes.GetBytes(aeo.KeySize / 8);
+            aeo.IV = passbytes.GetBytes(aeo.BlockSize / 8);
 
             CryptoStream cryptostream = new CryptoStream(memstream,
-            aes.CreateDecryptor(), CryptoStreamMode.Write);
+            aeo.CreateDecryptor(), CryptoStreamMode.Write);
             cryptostream.Write(strData, 0, strData.Length);
             cryptostream.Close();
             return memstream.ToArray();
