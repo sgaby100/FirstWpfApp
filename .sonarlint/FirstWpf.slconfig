@@ -1,0 +1,15 @@
+{
+  "ServerUri": "https://sonarcloud.io/",
+  "Organization": {
+    "Key": "sgaby100",
+    "Name": "sgaby100"
+  },
+  "ProjectKey": "FirstWpfApp",
+  "ProjectName": "FirstWpfApp",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AXABlAP-S100_d71O-u0",
+      "ProfileTimestamp": "2020-01-10T12:36:33+02:00"
+    }
+  }
+}

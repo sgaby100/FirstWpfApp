@@ -1,21 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
+using System.Diagnostics;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FirstWpf
 {
@@ -38,14 +30,15 @@ namespace FirstWpf
         public string Title { get; set; }
         public string Subtitle { get; set; }
         public string[] authors { get; set; }
-        public imginfo imageLinks { get; set; }
+        public Imginfo imageLinks { get; set; }
+        public string infoLink { get; set; }
+        public float Price { get; set; }
     }
-    public class imginfo
+    public class Imginfo
     {
         public string thumbnail { get; set; }
     }
-
-
+  
 
     public partial class MainWindow : Window
     {
@@ -58,6 +51,8 @@ namespace FirstWpf
             Credit.Text = $"{credit:C}";
             Time.Text = data.ToString();
         }
+       
+
         private void LogOut(object sender, RoutedEventArgs e)
         {
             var newForm = new LogInWindow();
@@ -73,8 +68,11 @@ namespace FirstWpf
                 leftside.Background = (Brush)bc.ConvertFrom("#484848");
                 mainwindow.Foreground = new SolidColorBrush(Colors.White);
                 hidenimg.Foreground = new SolidColorBrush(Colors.Black);
+                shopBackg.Background = new SolidColorBrush(Colors.Gray);
+                SearchBar.Foreground = new SolidColorBrush(Colors.Black);
             }
         }
+     
         private void Toggle_Unchecked(object sender, RoutedEventArgs e)
         {
             if (Toggle.IsChecked == false)
@@ -82,6 +80,8 @@ namespace FirstWpf
                 mainwindow.Background = new SolidColorBrush(Colors.White);
                 leftside.Background = new SolidColorBrush(Colors.White);
                 mainwindow.Foreground = new SolidColorBrush(Colors.Black);
+                shopBackg.Background = new SolidColorBrush(Colors.White);
+
             }
         }
 
@@ -92,21 +92,29 @@ namespace FirstWpf
         private void closeShop(object sender, RoutedEventArgs e)
         {
             ShopWindow.Visibility = Visibility.Collapsed;
+            ItemControl.ItemsSource = null;
+            SearchBar.Clear();
         }
 
+        public void Price(List<BookInfo> bok)
+        {
+                Random price = new Random();
+
+           
+            for(int i = 0; i < bok.Count; i++)
+            {
+                float number = price.Next(10,60);
+
+                bok[i].Price = number * 3 / 2;
+            }
+        }
 
         private async void SearchBtn_Click(object sender, RoutedEventArgs e)
         {
             ItemControl.ItemsSource = null;
 
             HttpClient client = new HttpClient();
-            // adding the books
-            /*
-            List<Book> items = new List<Book>();
-            items.Add(new Book() { Title = $"{input}"});
-
-            ItemControl.ItemsSource = items;
-        */
+         
 
             try
             {
@@ -115,34 +123,32 @@ namespace FirstWpf
                 HttpResponseMessage response = await client.GetAsync($"https://www.googleapis.com/books/v1/volumes?q={Title}+inauthor:keyes");
                 response.EnsureSuccessStatusCode();
 
-                string responseBody = await response.Content.ReadAsStringAsync();
-                // Above three lines can be replaced with new helper method below
-                // string responseBody = await client.GetStringAsync(uri);
-                // Console.WriteLine(responseBody);
+                
                 var res = JsonConvert.DeserializeObject<Result>(await response.Content.ReadAsStringAsync());
 
                 List<BookInfo> books = new List<BookInfo>();
                 for (int i = 0; i < res.Items.Length; i++)
                 {
-                    books.Add(new BookInfo { Subtitle = res.Items[0].VolumeInfo.Subtitle, Title = res.Items[i].VolumeInfo.Title, authors = res.Items[i].VolumeInfo.authors, imageLinks = res.Items[i].VolumeInfo.imageLinks });
+                    books.Add(new BookInfo { Subtitle = res.Items[0].VolumeInfo.Subtitle, 
+                        Title = res.Items[i].VolumeInfo.Title, authors = res.Items[i].VolumeInfo.authors, 
+                        imageLinks = res.Items[i].VolumeInfo.imageLinks,
+                        infoLink = res.Items[i].VolumeInfo.infoLink});
                 }
-
-
-
+                Price(books);
                 ItemControl.ItemsSource = books;
-
             }
             catch
             {
-
+                MessageBox.Show("No Books Found");
             }
         }
-
-
-        private void MouseOver(object sender, MouseEventArgs e)
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
-
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
+
+       
     }
 
 }

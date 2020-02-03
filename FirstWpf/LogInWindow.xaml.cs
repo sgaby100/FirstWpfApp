@@ -1,17 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Dapper;
-
+using DataAcces;
 
 
 namespace FirstWpf
@@ -22,7 +16,7 @@ namespace FirstWpf
     public partial class LogInWindow : Window
     {
         //List of Person
-        List<Person> people = new List<Person>();
+        List<Emplyee> people = new List<Emplyee>();
 
         public LogInWindow()
         {
@@ -30,7 +24,7 @@ namespace FirstWpf
         }
 
         //Login Button Functionality
-        private void LogInBtn_Click(object sender, RoutedEventArgs e)
+        private void Login(object sender, RoutedEventArgs e)
         {
             Random newRandom = new Random();
             int ID = newRandom.Next(5, 100);
@@ -73,16 +67,14 @@ namespace FirstWpf
                     foreach(string value in digit)
                     {
                         int number;
-                        if (int.TryParse(value, out number) == true)
+                        if (int.TryParse(value, out number))
                         {
                             MessageBox.Show("You cant use numbers in your Username");
                             return;
                         }
-                    }    
+                    }
 
-                    
-
-                    if (people.Any(person => person.EmployeeId != ID))
+                    if (people.Any(x => x.ID != ID))
                     {
                         ac.AddEmployees(userName.Text, passwoardUI.Password, ID);
                         MessageBox.Show("Successfully Enrolled");
@@ -91,7 +83,7 @@ namespace FirstWpf
                     else
                     {
                         int id = newRandom.Next(100, 1000);
-                        ac.AddEmployees(userName.Text, passwoardUI.Password, id); ;
+                        ac.AddEmployees(userName.Text, passwoardUI.Password, id); 
                         MessageBox.Show("Successfully Enrolled");
                         GotoMainWindow(sender, e);
                     }
@@ -100,7 +92,7 @@ namespace FirstWpf
             else
             {
                 //Check credentials of the input with the db ones
-                foreach (Person pers in people)
+                foreach (Emplyee pers in people)
                 {
                     string pas = pers.Password;
                     string DecryptedPassword = DataEncoding.Decript(pas);
@@ -125,16 +117,13 @@ namespace FirstWpf
             this.Close(); 
         }
 
-        private void AddUser_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
+      
         //Using enter key to press submite
         private void passwoardUI_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Enter)
             {
-                LogInBtn_Click(sender,e);
+                Login(sender,e);
             }
             else if(e.Key == Key.Escape)
             {

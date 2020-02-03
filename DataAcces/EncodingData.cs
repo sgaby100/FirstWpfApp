@@ -1,22 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace FirstWpf
 {
-    class EncodingData
+
+    public class EncodingData
     {
-        public  string Decript(string pass)
+        private Aes aes = new AesManaged();
+
+        public string Decript(string pass)
         {
             string strDecrypted = (Decrypt(pass));
             return strDecrypted;
         }
-        public  class Global
+        public  static class Global
         {
+
             // set password
             public const string strPassword = "LetMeIn99$";
 
@@ -37,7 +39,6 @@ namespace FirstWpf
         }
 
 
-        // decoding
         public  string Decrypt(string strData)
         {
             return Encoding.UTF8.GetString(Decrypt(Convert.FromBase64String(strData)));
@@ -57,7 +58,7 @@ namespace FirstWpf
             });
 
             MemoryStream memstream = new MemoryStream();
-            Aes aes = new AesManaged();
+            
             aes.Key = passbytes.GetBytes(aes.KeySize / 8);
             aes.IV = passbytes.GetBytes(aes.BlockSize / 8);
 
@@ -81,7 +82,6 @@ namespace FirstWpf
             });
 
             MemoryStream memstream = new MemoryStream();
-            Aes aes = new AesManaged();
             aes.Key = passbytes.GetBytes(aes.KeySize / 8);
             aes.IV = passbytes.GetBytes(aes.BlockSize / 8);
 

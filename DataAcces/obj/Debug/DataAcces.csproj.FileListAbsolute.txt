@@ -1,0 +1,6 @@
+C:\Projects\FirstWpf\DataAcces\obj\Debug\DataAcces.csprojAssemblyReference.cache
+C:\Projects\FirstWpf\DataAcces\bin\Debug\DataAcces.dll.config
+C:\Projects\FirstWpf\DataAcces\bin\Debug\DataAcces.dll
+C:\Projects\FirstWpf\DataAcces\bin\Debug\DataAcces.pdb
+C:\Projects\FirstWpf\DataAcces\obj\Debug\DataAcces.dll
+C:\Projects\FirstWpf\DataAcces\obj\Debug\DataAcces.pdb

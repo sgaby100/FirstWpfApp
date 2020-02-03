@@ -41,13 +41,13 @@
                    Width="900"
                    Height="550">
                 <Image 
-                Source="C:\WebDev\Background.JPG"
+                Source="https://image.freepik.com/free-vector/abstract-technology-particle-background_52683-25766.jpg"
                 Margin="-80,0,0,0"
                 />
             </Grid>
             <Label 
                 FontSize="70" 
-                Foreground="#000a12"
+                Foreground="AliceBlue"
                 Grid.Column="0" 
                 Grid.Row="0"
                 FontWeight="Normal"
@@ -85,14 +85,14 @@
                 VerticalAlignment="Center"
                 Grid.ColumnSpan="4"
                 KeyDown="userName_KeyDown"
-                Height="50"
+                Height="60"
                 x:Name="userName"
                 FontSize="30"
                 FontStyle="Italic"
                 Width="200"
                 materialDesign:HintAssist.Hint="UserName"
-                materialDesign:HintAssist.Foreground="Green"
-                materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                materialDesign:HintAssist.Foreground="LightBlue"
+                materialDesign:TextFieldAssist.UnderlineBrush="LightBlue"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
             <PasswordBox
                 Grid.Row="3"
@@ -107,14 +107,14 @@
                 KeyDown="passwoardUI_KeyDown"
                 Width="200"
                 materialDesign:HintAssist.Hint="Password"
-                materialDesign:HintAssist.Foreground="Green"
-                materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                materialDesign:HintAssist.Foreground="LightBlue"
+                materialDesign:TextFieldAssist.UnderlineBrush="LightBlue"
                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
             <Button
                 Grid.Row="4"
                 Margin="0,-120,0,0"
                 Width="150"
-                Click="LogInBtn_Click"
+                Click="Login"
                 Grid.ColumnSpan="4" 
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
@@ -133,7 +133,6 @@
                 Grid.ColumnSpan="4"
                 HorizontalAlignment="Center"
                 Margin="0,-100,-300,0"
-                Checked="AddUser_Checked" 
                 Style="{StaticResource MaterialDesignActionLightToggleButton}"
                 IsChecked="false"
                 materialDesign:ShadowAssist.ShadowDepth="Depth5"

@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FirstWpf
+namespace DataAcces
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -23,43 +23,43 @@ namespace FirstWpf
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Emplyees")]
-	public partial class DataClasses1DataContext : System.Data.Linq.DataContext
+	public partial class DataBaseConectionDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
 		
-	#region Extensibility Method Definitions
-	partial void OnCreated();
-	partial void InsertEmplyee(Emplyee instance);
-	partial void UpdateEmplyee(Emplyee instance);
-	partial void DeleteEmplyee(Emplyee instance);
-	#endregion
+    #region Extensibility Method Definitions
+    partial void OnCreated();
+    partial void InsertEmplyee(Emplyee instance);
+    partial void UpdateEmplyee(Emplyee instance);
+    partial void DeleteEmplyee(Emplyee instance);
+    #endregion
 		
-		public DataClasses1DataContext() : 
-				base(global::FirstWpf.Properties.Settings.Default.EmplyeesConnectionString, mappingSource)
+		public DataBaseConectionDataContext() : 
+				base(global::DataAcces.Properties.Settings.Default.EmplyeesConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(string connection) : 
+		public DataBaseConectionDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(System.Data.IDbConnection connection) : 
+		public DataBaseConectionDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DataBaseConectionDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DataBaseConectionDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
@@ -80,45 +80,45 @@ namespace FirstWpf
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private string _EmployeeId;
+		private int _ID;
 		
 		private string _UserName;
 		
 		private string _Password;
 		
-	#region Extensibility Method Definitions
-	partial void OnLoaded();
-	partial void OnValidate(System.Data.Linq.ChangeAction action);
-	partial void OnCreated();
-	partial void OnEmployeeIdChanging(string value);
-	partial void OnEmployeeIdChanged();
-	partial void OnUserNameChanging(string value);
-	partial void OnUserNameChanged();
-	partial void OnPasswordChanging(string value);
-	partial void OnPasswordChanged();
-	#endregion
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    #endregion
 		
 		public Emplyee()
 		{
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeId", AutoSync=AutoSync.OnInsert, DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string EmployeeId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int ID
 		{
 			get
 			{
-				return this._EmployeeId;
+				return this._ID;
 			}
 			set
 			{
-				if ((this._EmployeeId != value))
+				if ((this._ID != value))
 				{
-					this.OnEmployeeIdChanging(value);
+					this.OnIDChanging(value);
 					this.SendPropertyChanging();
-					this._EmployeeId = value;
-					this.SendPropertyChanged("EmployeeId");
-					this.OnEmployeeIdChanged();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
 				}
 			}
 		}

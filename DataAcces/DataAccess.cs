@@ -1,37 +1,30 @@
-﻿using System;
+﻿using DataAcces;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using Dapper;
+using System.Windows.Forms;
 
 namespace FirstWpf
 {
     public class DataAccess
     {
-        EncodingData DataEncoding = new EncodingData();
-        public List<Person> GetPeople(string name)
+        readonly EncodingData  DataEncoding = new EncodingData();
+        public List<Emplyee> GetPeople(string name)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(Helper.CnnVal("EmplyeesDB")))
             {
-                DataClasses1DataContext dbContext = new DataClasses1DataContext();
+                DataBaseConectionDataContext dbContext = new DataBaseConectionDataContext();
 
                 var solutie = from employe in dbContext.Emplyees
                               where employe.UserName == name
                               select employe;
-                List<Person> pers = new List<Person>();
 
-                foreach (var stat in solutie)
-                {
-                    pers.Add(new Person {UserName = stat.UserName,EmployeeId = Int32.Parse(stat.EmployeeId),Password = stat.Password});
-                    return pers;
-                }
-                return pers;
+
+                var result = solutie.ToList();
+                          
+              
+                return result;
             }
         }
 
@@ -42,17 +35,16 @@ namespace FirstWpf
             {
                 string EncryptedPassword = (DataEncoding.Encrypt(passwoardUI));
 
-                DataClasses1DataContext dbContext = new DataClasses1DataContext();
+                DataBaseConectionDataContext dbContext = new DataBaseConectionDataContext();
 
                 Emplyee pers = new Emplyee
                 {
-                EmployeeId = id.ToString(),
+                ID = id,
                 UserName = userName,
                 Password = EncryptedPassword,
                 };
 
                 dbContext.Emplyees.InsertOnSubmit(pers);
-
                 try
                 {
                     dbContext.SubmitChanges();

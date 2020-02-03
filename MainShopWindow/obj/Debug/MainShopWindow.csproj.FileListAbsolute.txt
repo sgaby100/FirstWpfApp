@@ -1,0 +1,6 @@
+C:\Projects\FirstWpf\MainShopWindow\obj\Debug\MainShopWindow.csprojAssemblyReference.cache
+C:\Projects\FirstWpf\MainShopWindow\obj\Debug\App.g.cs
+C:\Projects\FirstWpf\MainShopWindow\obj\Debug\MainShopWindow_MarkupCompile.cache
+C:\Projects\FirstWpf\MainShopWindow\obj\Debug\MainShopWindow_MarkupCompile.lref
+C:\Projects\FirstWpf\MainShopWindow\obj\Debug\MainShopWindow.Properties.Resources.resources
+C:\Projects\FirstWpf\MainShopWindow\obj\Debug\MainShopWindow.csproj.GenerateResource.cache
