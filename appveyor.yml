@@ -1,0 +1,7 @@
+before_build:
+ - nuget restore
+build_script:
+ - choco install "sonarscanner-msbuild-net46" -y
+ - SonarScanner.MSBuild.exe begin /k:"FirstWpfApp" /d:"sonar.host.url=https://sonarcloud.io" /o:"sgaby100" /d:"sonar.login=5093dbd5ebe178a419438578095bb9d7fe34412a"
+ - msbuild /verbosity:quiet "FirstWpf.sln"
+ - SonarScanner.MSBuild.exe end /d:"sonar.login=5093dbd5ebe178a419438578095bb9d7fe34412a"
